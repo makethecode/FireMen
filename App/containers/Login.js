@@ -13,7 +13,7 @@ import {
     ActivityIndicator
 } from 'react-native';
 import { connect } from 'react-redux';
-var { height, width } = Dimensions.get('window');
+import Icon from 'react-native-vector-icons/FontAwesome'
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Modal from 'react-native-modal'
 import FloatLabelTextInput from 'react-native-floating-label-text-input';
@@ -23,8 +23,7 @@ import {
     setAuthTrue
 } from '../actions/UserActions';
 
-
-
+var { height, width } = Dimensions.get('window');
 
 class Login extends Component {
 
@@ -40,133 +39,156 @@ class Login extends Component {
 
     render() {
         return (
-            <View style={styles.container}>
-                <View style={{ flex: 2, marginBottom: 0 }}>
+            <View style={[styles.container,{backgroundColor:'#eee'}]}>
 
-                    <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'center', padding: 25,height:70 }}>
+                <Image resizeMode="stretch" source={require('../../img/bg.jpeg')} style={{width:width,height:height}}>
 
+                    <View style={{backgroundColor:'transparent',flex:1,justifyContent:'center',alignItems:'center'}}>
+                        <Image resizeMode="contain" source={require('../../img/loginLogo.png')} style={{justifyContent:'center',alignItems:'center',width:500,height:250,marginLeft:300,marginTop:50}}/>
                     </View>
 
+                    <View style={{paddingVertical:2,paddingHorizontal:25,backgroundColor:'transparent',flex:1,alignItems:'center'}} >
 
-                    <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', width: width }}>
-                        <Image source={require('../../img/FireMen.jpeg')} style={{ width: 200, height: 200 }}
-                               resizeMode="stretch" />
-                    </View>
+                        {/*输入用户名*/}
+                        <View style={{flexDirection:'row',height:45,marginBottom:10,backgroundColor:'rgba(255,255,255,0.2)',margin:10,padding:3,borderRadius:5}}>
 
-                </View>
+                            <View style={{flex:6}}>
+                                <View style={{flex:1,flexDirection:'row'}}>
 
-                <View style={{ flex: 3 }}>
-                    <View style={{ flexDirection: 'row', width: width, justifyContent: 'center' }}>
+                                    <View style={{flex:1,flexDirection:'row',alignItems:'center',justifyContent:'center',padding:4
+                                        ,marginLeft:0,paddingHorizontal:2}}>
+                                        <Icon size={18} name="user-o" color="#eee"></Icon>
+                                    </View>
 
-                        <View style={{ flexDirection: 'row', width: width * 5 / 6 }}>
-                            <FloatLabelTextInput
-                                placeholder={"username/用户名"}
-                                value={this.state.username}
-                                selectionColor="#ff5a5d"
-                                onChangeTextValue={(val) => {
+
+                                    <View style={{flex:6,flexDirection:'row',alignItems:'center',justifyContent:'flex-start'}}>
+                                        <FloatLabelTextInput
+                                            style={{backgroundColor:'transparent'}}
+                                            placeholder={"请输入用户名"}
+                                            value={this.state.username}
+                                            selectionColor="#ff5a5d"
+                                            onChangeTextValue={(val) => {
                                     this.setState({ username: val })
                                 }}
-                            />
+                                        />
+                                    </View>
+                                </View>
+                            </View>
+
                         </View>
-                    </View>
 
+                        {/*输入密码*/}
+                        <View style={{flexDirection:'row',height:45,marginTop:10,backgroundColor:'rgba(255,255,255,0.2)',margin:10,padding:3,borderRadius:5}}>
 
-                    <View style={{ flexDirection: 'row', width: width, justifyContent: 'center', padding: 0 }}>
+                            <View style={{flex:6}}>
+                                <View style={{flex:1,flexDirection:'row'}}>
 
+                                    <View style={{flex:1,flexDirection:'row',alignItems:'center',justifyContent:'center',padding:4,
+                                        paddingHorizontal:2,marginLeft:0}}>
+                                        <Icon size={20} name="lock" color="#eee"></Icon>
+                                    </View>
 
-                        <View style={{ flexDirection: 'row', width: width * 5 / 6 }}>
-                            <FloatLabelTextInput
-                                placeholder={"password/密码"}
-                                value={this.state.password}
-                                selectionColor="#ff5a5d"
-                                secureTextEntry={true}
-                                onChangeTextValue={(val) => {
+                                    <View style={{flex:6,flexDirection:'row',alignItems:'center',justifyContent:'flex-start'}}>
+                                        <FloatLabelTextInput
+                                            style={{backgroundColor:'transparent'}}
+                                            placeholder={"请输入密码"}
+                                            value={this.state.password}
+                                            selectionColor="#ff5a5d"
+                                            secureTextEntry={true}
+                                            onChangeTextValue={(val) => {
                                     this.setState({ password: val })
                                 }}
-                            />
+                                        />
+                                    </View>
+
+                                </View>
+                            </View>
                         </View>
-                    </View>
 
-
-                    {/*登录*/}
-                    <View style={{ flexDirection: 'row', width: width, justifyContent: 'center', marginTop: 20 }}>
-                        <TouchableOpacity style={{
-                            width: width * 5 / 6, backgroundColor: '#e92640', height: 40,
-                            flexDirection: 'row', alignItems: 'center', justifyContent: 'center'
-                        }}
-                                          onPress={() => {
-
-                               // Bridge.jump()
-
-
-                                if (this.state.username != '' && this.state.password != '') {
+                        {/*登录按钮*/}
+                        <TouchableOpacity style={{flexDirection:'row',height:45,marginBottom:10,backgroundColor:'#eee',margin:10,marginTop:25,padding:3,borderRadius:5}}
+                                          onPress={()=>{
+                                    if (this.state.username != '' && this.state.password != '') {
                                     this.setState({ isModalVisible: true })
-                                    // this.props.dispatch(doLogin(this.state.username, this.state.password)).then((json) => {
-                                    //     if (json.re == 1)
-                                    //         this.props.dispatch(setAuthTrue())
-                                    // })
-
                                     if (this.state.username == '123')
                                         this.props.dispatch(setAuthTrue())
-
                                 }
-                            }}>
-                            <Text style={{ color: '#fff', fontWeight: 'bold', fontSize: 16 }}>登录</Text>
-
-                        </TouchableOpacity>
-                    </View>
-
-                    {/*注册*/}
-                    <View style={{ flexDirection: 'row', width: width, justifyContent: 'center', marginTop: 20 }}>
-                        <TouchableOpacity style={{
-                            width: width * 5 / 6, backgroundColor: '#e92640', height: 40,
-                            flexDirection: 'row', alignItems: 'center', justifyContent: 'center'
-                        }}
-                                          onPress={() => {
-
-
                                           }}>
-                            <Text style={{ color: '#fff', fontWeight: 'bold', fontSize: 16 }}>注册</Text>
-
+                            <View style={{flex:1}}>
+                                <View style={{flex:1,flexDirection:'column',alignItems:'center',justifyContent:'flex-start'}}>
+                                    <View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
+                                        <Text style={{color:'#202640',fontSize:16,fontWeight:'bold'}}>登录</Text>
+                                    </View>
+                                </View>
+                            </View>
                         </TouchableOpacity>
+
+                        <View style={{width:width,justifyContent:'center',AlignItems:'center'}}>
+                            <Text style={{width:width,justifyContent:'center',textAlign:'center',color:'#eee',fontSize:12}}>忘记密码?</Text>
+                        </View>
+
                     </View>
 
 
+                    <View style={{flex:1,justifyContent:'center',alignItems:'center',flexDirection:'column',paddingHorizontal:28}}>
 
-                </View>
+                        <View style={{flex:1,backgroundColor:'transparent',flexDirection:'row',margin:10,marginTop:height/6}}>
+                            <View style={{flex:1,height:0.8,backgroundColor:'#eee',marginTop:5}}/>
+                            <View style={{flex:1}}>
+                                <Text style={{textAlign:'center',color:'#eee',fontSize:12}}>
+                                    还没有帐号?
+                                </Text>
+                            </View>
+                            <View style={{flex:1,height:0.8,backgroundColor:'#eee',marginTop:5}}/>
+                        </View>
 
+                        {/*注册按钮*/}
+                        <TouchableOpacity style={{flexDirection:'row',height:45,marginBottom:30,backgroundColor:'transparent',margin:10,padding:3,borderRadius:5,
+                        borderWidth:1,borderColor:'#eee'}}
+                                          onPress={()=>{
+                                          }}>
+                            <View style={{flex:1}}>
+                                <View style={{flex:1,flexDirection:'column',alignItems:'center',justifyContent:'flex-start'}}>
+                                    <View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
+                                        <Text style={{color:'#eee',fontSize:16,fontWeight:'bold'}}>注册</Text>
+                                    </View>
+                                </View>
+                            </View>
+                        </TouchableOpacity>
 
+                        {/*loading模态框*/}
+                        <Modal isVisible={this.state.isModalVisible} style={{ padding: 0, margin: 0 }}>
 
-                <Modal isVisible={this.state.isModalVisible} style={{ padding: 0, margin: 0 }}>
-
-                    <View style={{ flex: 1 }}>
-                    </View>
-                    <View style={{
+                            <View style={{ flex: 1 }}>
+                            </View>
+                            <View style={{
                         height: 160, width: width, backgroundColor: '#fff',
                         justifyContent: 'center', alignItems: 'center'
                     }}>
-                        <View>
-                            <ActivityIndicator
-                                animating={true}
-                                style={[styles.centering, { height: 80 }]}
-                                size="large" />
-                        </View>
+                                <View>
+                                    <ActivityIndicator
+                                        animating={true}
+                                        style={[styles.centering, { height: 80 }]}
+                                        size="large" />
+                                </View>
 
-                        <TouchableOpacity style={{
+                                <TouchableOpacity style={{
                             width: 120, backgroundColor: '#0ff', height: 40, marginTop: 10,
                             flexDirection: 'row', alignItems: 'center', justifyContent: 'center'
                         }}
-                                          onPress={() => {
+                                                  onPress={() => {
                                 this.setState({ isModalVisible: false })
                             }}>
-                            <Text style={{ color: '#fff', fontWeight: 'bold', fontSize: 16 }}>取消</Text>
+                                    <Text style={{ color: '#fff', fontWeight: 'bold', fontSize: 16 }}>取消</Text>
 
-                        </TouchableOpacity>
+                                </TouchableOpacity>
+
+                            </View>
+                        </Modal>
 
                     </View>
-                </Modal>
 
-
+                </Image>
 
             </View>
 
