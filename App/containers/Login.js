@@ -13,6 +13,7 @@ import {
     ActivityIndicator
 } from 'react-native';
 import { connect } from 'react-redux';
+import Config from '../../config';
 import Icon from 'react-native-vector-icons/FontAwesome'
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Modal from 'react-native-modal'
@@ -22,7 +23,7 @@ import {
     doLogin,
     setAuthTrue
 } from '../actions/UserActions';
-
+import Proxy from '../proxy/Proxy'
 var { height, width } = Dimensions.get('window');
 
 class Login extends Component {
@@ -108,11 +109,13 @@ class Login extends Component {
                         {/*登录按钮*/}
                         <TouchableOpacity style={{flexDirection:'row',height:45,marginBottom:10,backgroundColor:'#eee',margin:10,marginTop:25,padding:3,borderRadius:5}}
                                           onPress={()=>{
-                                    if (this.state.username != '' && this.state.password != '') {
-                                    this.setState({ isModalVisible: true })
-                                    if (this.state.username == '123')
-                                        this.props.dispatch(setAuthTrue())
-                                }
+                                              if (this.state.username != '' && this.state.password != '') {
+                                                  this.setState({ isModalVisible: true })
+                                                  this.props.dispatch(doLogin(this.state.username, this.state.password)).then((json) => {
+                                                      if (json.re == 1)
+                                                          this.props.dispatch(setAuthTrue())
+                                                  })
+                                              }
                                           }}>
                             <View style={{flex:1}}>
                                 <View style={{flex:1,flexDirection:'column',alignItems:'center',justifyContent:'flex-start'}}>

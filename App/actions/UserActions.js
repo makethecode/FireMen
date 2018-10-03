@@ -27,7 +27,12 @@ let doTomcatLogin=(username,password)=>{
                 loginType:1
             }
         }).then((json)=>{
-            resolve({re:1})
+            if(json.reCode == '1'){
+                alert("用户名不存在！")
+            }else{
+                resolve({re:1})
+            }
+
         }).catch((e)=>{
             reject(e)
         })
@@ -36,30 +41,6 @@ let doTomcatLogin=(username,password)=>{
 
 }
 
-
-//nodejs端的登录
-let doNodejsLogin=(username,password)=>{
-
-
-    return new Promise((resolve, reject) => {
-
-        Proxy.postes({
-            url: Config.server + '/login',
-            headers: {
-                'Authorization': "Basic czZCaGRSa3F0MzpnWDFmQmF0M2JW",
-                'Content-Type': 'application/x-www-form-urlencoded'
-            },
-            body: "grant_type=password&password=" + password + "&username=" + username
-        }).then((json)=>{
-            var accessToken = json.access_token;
-            resolve({re:1,data:{accessToken:accessToken}})
-        }).catch((e)=>{
-            reject(e)
-        })
-
-    })
-
-}
 
 
 
@@ -84,23 +65,8 @@ export let doLogin = (username, password) => {
                 PreferenceStore.put('username', username);
                 PreferenceStore.put('password', password);
 
-                //获取课程
-                return Proxy.postes({
-                    url: Config.server + '/func/courseBean/getCourseListMobile',
-                    headers: {
-                        'Authorization': "Bearer " + accessToken,
-                        'Content-Type': 'application/json'
-                    },
-                    body: {
 
-                    }
-                });
             }).then((json) => {
-
-                //更新个人课程到redux
-                if (json.re == 1) {
-                    dispatch(updatePersonCourses(json.data ));
-                }
 
                 resolve({ re: 1 })
 
