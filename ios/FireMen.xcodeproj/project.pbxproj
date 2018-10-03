@@ -51,6 +51,7 @@
 		8B707B1C0B4840BBA8EE2EF2 /* FontAwesome5_Solid.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6244A8B693FA405BB422F65D /* FontAwesome5_Solid.ttf */; };
 		90CE39E2879D45BE9BB80488 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6AE21EFAA3F2497EBFEFB55A /* FontAwesome.ttf */; };
 		AC880C23FBB24F60A1F9BA27 /* FontAwesome5_Brands.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA5C0FF4F90B476BB499EE1C /* FontAwesome5_Brands.ttf */; };
+		AD1848E621648B46004FD381 /* libRNSensitiveInfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AD8EE0F4215F26EA00BDBF24 /* libRNSensitiveInfo.a */; };
 		CD44B6F5DD65430B8F261AEF /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B95D097449E4EEA8E0F781E /* libRNVectorIcons.a */; };
 		D00E3812475B4ACDACB6FE61 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6FA93E5E25AF44929CAC119B /* Zocial.ttf */; };
 		D8C24B69468F4C0784A4D1E3 /* libRNFetchBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CDAE074A2143405DA5074C71 /* libRNFetchBlob.a */; };
@@ -337,6 +338,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AD1848E621648B46004FD381 /* libRNSensitiveInfo.a in Frameworks */,
 				140ED2AC1D01E1AD002B40FF /* libReact.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -573,6 +575,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				71227BE3FFF3423F8AF0B188 /* Resources */,
 				AD8EE0C7215F26E900BDBF24 /* Recovered References */,
+				AD1848E421648B46004FD381 /* Frameworks */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -587,6 +590,13 @@
 				2D02E4901E0B4A5D006451C7 /* FireMen-tvOSTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		AD1848E421648B46004FD381 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		AD8EE0C7215F26E900BDBF24 /* Recovered References */ = {
@@ -719,14 +729,20 @@
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
+						DevelopmentTeam = BY3A7B54BR;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
+					};
+					13B07F861A680F5B00A75B9A = {
+						DevelopmentTeam = BY3A7B54BR;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = BY3A7B54BR;
 						ProvisioningStyle = Automatic;
 					};
 					2D02E48F1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = BY3A7B54BR;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 2D02E47A1E0B4A5D006451C7;
 					};
@@ -1174,6 +1190,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = BY3A7B54BR;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -1209,6 +1226,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
+				DEVELOPMENT_TEAM = BY3A7B54BR;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-fetch-blob/ios/**",
@@ -1241,6 +1259,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
+				DEVELOPMENT_TEAM = BY3A7B54BR;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-fetch-blob/ios/**",
@@ -1265,6 +1284,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = BY3A7B54BR;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-fetch-blob/ios/**",
@@ -1294,6 +1314,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = BY3A7B54BR;
 				ENABLE_TESTABILITY = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				HEADER_SEARCH_PATHS = (
@@ -1335,6 +1356,7 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = BY3A7B54BR;
 				GCC_NO_COMMON_BLOCKS = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1373,6 +1395,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = BY3A7B54BR;
 				ENABLE_TESTABILITY = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "FireMen-tvOSTests/Info.plist";
@@ -1402,6 +1425,7 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = BY3A7B54BR;
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "FireMen-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";

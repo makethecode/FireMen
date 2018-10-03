@@ -13,6 +13,7 @@ import { connect } from 'react-redux';
 
 import { Navigator } from 'react-native-deprecated-custom-components';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import Ionicons from 'react-native-vector-icons/Ionicons'
 import TabNavigator from 'react-native-tab-navigator';
 
 import {
@@ -54,8 +55,8 @@ class App extends Component {
                 title={route}
                 titleStyle={{color:'#9e9ca3',fontSize:13}}
                 selectedTitleStyle={{color:'#2478a7'}}
-                renderIcon={() => <Icon name={icon} size={26} color="#aaa"/>}
-                renderSelectedIcon={() => <Icon name={icon} size={26} color='#2478a7' />}
+                renderIcon={() => <Ionicons name={icon} size={26} color="#aaa"/>}
+                renderSelectedIcon={() => <Ionicons name={icon} size={26} color='#2478a7' />}
                 onPress={() => {
                     this.setState({ selectedTab: route });
                     this.props.dispatch(updateRootTab({tab:route}));
@@ -125,8 +126,8 @@ class App extends Component {
             return (
 
                 <TabNavigator  tabBarStyle={defaultStyle} sceneStyle={defaultSceneStyle}>
-                    {this._createNavigatorItem('首页','home')}
-                    {this._createNavigatorItem('图表','Charts')}
+                    {this._createNavigatorItem('首页','md-home')}
+                    {this._createNavigatorItem('图表','md-stats')}
                 </TabNavigator>
             );
         }else{

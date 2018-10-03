@@ -17,4 +17,5 @@ var PreferenceStore={
     }
 
 };
+
 module.exports=PreferenceStore

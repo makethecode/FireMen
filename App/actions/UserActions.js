@@ -9,41 +9,6 @@ import {
     SET_AUTH_TRUE
 } from '../constants/UserConstants';
 
-//tomcat端的登录
-let doTomcatLogin=(username,password)=>{
-
-
-    return new Promise((resolve, reject) => {
-
-        Proxy.postes({
-            url: Config.server + '/func/auth/webLogin',
-            headers: {
-                'Authorization': "Basic czZCaGRSa3F0MzpnWDFmQmF0M2JW",
-                'Content-Type': 'application/json'
-            },
-            body: {
-                loginName:username,
-                password:password,
-                loginType:1
-            }
-        }).then((json)=>{
-            if(json.reCode == '1'){
-                alert("用户名不存在！")
-            }else{
-                resolve({re:1})
-            }
-
-        }).catch((e)=>{
-            reject(e)
-        })
-
-    })
-
-}
-
-
-
-
 //登录
 export let doLogin = (username, password) => {
 
@@ -51,29 +16,34 @@ export let doLogin = (username, password) => {
 
         return new Promise((resolve, reject) => {
 
-
             var accessToken = null;
 
-            doTomcatLogin(username,password).then((json)=>{
+            Proxy.postes({
+                url: Config.server + '/func/auth/webLogin',
+                headers: {
+                    'Authorization': "Basic czZCaGRSa3F0MzpnWDFmQmF0M2JW",
+                    'Content-Type': 'application/json'
+                },
+                body: {
+                    loginName:username,
+                    password:password,
+                    loginType:1
+                }
+            }).then((json)=>{
+                if(json.reCode == '1'){
+                    alert("用户名不存在！")
+                }else{
+                    //accessToken=json.data.accessToken
+                    dispatch(updateCertificate({ username: username, password: password }));
 
-                //accessToken=json.data.accessToken
+                    PreferenceStore.put('username', username);
+                    PreferenceStore.put('password', password);
+                    resolve({re:1})
+                }
 
-
-                //存储关于用户的帐号和密码信息
-                dispatch(updateCertificate({ username: username, password: password }));
-
-                PreferenceStore.put('username', username);
-                PreferenceStore.put('password', password);
-
-
-            }).then((json) => {
-
-                resolve({ re: 1 })
-
-            }).catch((err) => {
-                console.error(err)
-                reject(err)
-            });
+            }).catch((e)=>{
+                reject(e)
+            })
         });
     }
 }

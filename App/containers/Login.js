@@ -10,13 +10,13 @@ import {
     Image,
     Dimensions,
     TouchableOpacity,
-    ActivityIndicator
+    ActivityIndicator,
+    Modal
 } from 'react-native';
 import { connect } from 'react-redux';
 import Config from '../../config';
 import Icon from 'react-native-vector-icons/FontAwesome'
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import Modal from 'react-native-modal'
 import FloatLabelTextInput from 'react-native-floating-label-text-input';
 import PreferenceStore from '../utils/PreferenceStore';
 import {
@@ -33,7 +33,8 @@ class Login extends Component {
 
         this.state = {
             username: '',
-            password: ''
+            password: '',
+            isModalVisible:false
         }
     }
 
@@ -133,89 +134,59 @@ class Login extends Component {
                     </View>
 
 
-                    <View style={{flex:1,justifyContent:'center',alignItems:'center',flexDirection:'column',paddingHorizontal:28}}>
-
-                        <View style={{flex:1,backgroundColor:'transparent',flexDirection:'row',margin:10,marginTop:height/6}}>
-                            <View style={{flex:1,height:0.8,backgroundColor:'#eee',marginTop:5}}/>
-                            <View style={{flex:1}}>
-                                <Text style={{textAlign:'center',color:'#eee',fontSize:12}}>
-                                    还没有帐号?
-                                </Text>
-                            </View>
-                            <View style={{flex:1,height:0.8,backgroundColor:'#eee',marginTop:5}}/>
-                        </View>
-
-                        {/*注册按钮*/}
-                        <TouchableOpacity style={{flexDirection:'row',height:45,marginBottom:30,backgroundColor:'transparent',margin:10,padding:3,borderRadius:5,
-                        borderWidth:1,borderColor:'#eee'}}
-                                          onPress={()=>{
-                                          }}>
-                            <View style={{flex:1}}>
-                                <View style={{flex:1,flexDirection:'column',alignItems:'center',justifyContent:'flex-start'}}>
-                                    <View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
-                                        <Text style={{color:'#eee',fontSize:16,fontWeight:'bold'}}>注册</Text>
-                                    </View>
-                                </View>
-                            </View>
-                        </TouchableOpacity>
-
-                        {/*loading模态框*/}
-                        <Modal isVisible={this.state.isModalVisible} style={{ padding: 0, margin: 0 }}>
-
-                            <View style={{ flex: 1 }}>
-                            </View>
-                            <View style={{
-                        height: 160, width: width, backgroundColor: '#fff',
-                        justifyContent: 'center', alignItems: 'center'
-                    }}>
-                                <View>
-                                    <ActivityIndicator
-                                        animating={true}
-                                        style={[styles.centering, { height: 80 }]}
-                                        size="large" />
-                                </View>
-
-                                <TouchableOpacity style={{
-                            width: 120, backgroundColor: '#0ff', height: 40, marginTop: 10,
-                            flexDirection: 'row', alignItems: 'center', justifyContent: 'center'
-                        }}
-                                                  onPress={() => {
-                                this.setState({ isModalVisible: false })
-                            }}>
-                                    <Text style={{ color: '#fff', fontWeight: 'bold', fontSize: 16 }}>取消</Text>
-
-                                </TouchableOpacity>
-
-                            </View>
-                        </Modal>
-
+                    <View style={{flex:1,justifyContent:'center',alignItems:'center',flexDirection:'column'}}>
                     </View>
-
                 </Image>
 
+                {/*loading模态框*/}
+                <Modal animationType={"fade"} transparent={true} visible={this.state.isModalVisible}>
+
+                    <TouchableOpacity style={[styles.modalContainer,styles.modalBackgroundStyle,{alignItems:'center'}]}
+                                      onPress={()=>{
+                                            //TODO:cancel this behaviour
+
+                                          }}>
+
+                        <View style={{width:width*2/3,height:80,backgroundColor:'rgba(60,60,60,0.9)',position:'relative',
+                                        justifyContent:'center',alignItems:'center',borderRadius:6}}>
+                            <ActivityIndicator
+                                animating={true}
+                                style={[styles.loader, {height: 40,position:'absolute',justifyContent:'center',alignItems:'center',transform: [{scale: 1.6}]}]}
+                                size="large"
+                                color="#00BFFF"
+                            />
+                            <View style={{flexDirection:'row',justifyContent:'center',marginTop:45}}>
+                                <Text style={{color:'#fff',fontSize:13,fontWeight:'bold'}}>
+                                    登录中...
+                                </Text>
+
+                            </View>
+                        </View>
+                    </TouchableOpacity>
+                </Modal>
             </View>
 
         )
     }
 
     componentDidMount() {
-        // var username = null;
-        // var password = null;
-        // PreferenceStore.get('username').then((val) => {
-        //     username = val
-        //     return PreferenceStore.get('password');
-        // }).then((val) => {
-        //     password = val
-        //     if (username !== undefined && username !== null && username != ''
-        //         && password !== undefined && password !== null && password != '') {
-        //
-        //         this.setState({
-        //             username: username,
-        //             password: password
-        //         })
-        //
-        //     }
-        // })
+        var username = null;
+        var password = null;
+        PreferenceStore.get('username').then((val) => {
+            username = val
+            return PreferenceStore.get('password');
+        }).then((val) => {
+            password = val
+            if (username !== undefined && username !== null && username != ''
+                && password !== undefined && password !== null && password != '') {
+
+                this.setState({
+                    username: username,
+                    password: password
+                })
+
+            }
+        })
     }
 
 
@@ -224,7 +195,7 @@ class Login extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: 'transparent',
         padding: 0
     },
     labelInput: {
@@ -240,12 +211,6 @@ const styles = StyleSheet.create({
         width: width * 4 / 5,
         padding: 12
     },
-    linearGradient: {
-        height: 50,
-        paddingLeft: 15,
-        paddingRight: 15,
-        borderRadius: 5
-    },
     buttonText: {
         fontSize: 18,
         fontFamily: 'Gill Sans',
@@ -254,10 +219,26 @@ const styles = StyleSheet.create({
         color: '#ffffff',
         backgroundColor: 'transparent',
     },
-    centering: {
-        alignItems: 'center',
+    modalContainer:{
+        flex:1,
         justifyContent: 'center',
-        padding: 8,
+    },
+    modalBackgroundStyle:{
+        backgroundColor:'rgba(0,0,0,0.3)'
+    },
+    logo: {
+        width: 80,
+        height:80,
+        resizeMode:'cover',
+        backgroundColor:'transparent',
+    },
+    loader: {
+        marginTop: 10
+    },
+    row:{
+        flexDirection:'row',
+        borderBottomWidth:1,
+        borderBottomColor:'#222'
     },
 });
 
