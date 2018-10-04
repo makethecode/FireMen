@@ -33,9 +33,9 @@ export let doLogin = (username, password) => {
                 if(json.reCode == '1'){
                     alert("用户名不存在！")
                 }else{
-                    //accessToken=json.data.accessToken
+                    accessToken=json.sessionId
                     dispatch(updateCertificate({ username: username, password: password }));
-
+                    dispatch(getAccessToken(accessToken));
                     PreferenceStore.put('username', username);
                     PreferenceStore.put('password', password);
                     resolve({re:1})
