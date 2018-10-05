@@ -43,10 +43,12 @@ class Login extends Component {
         return (
             <View style={[styles.container,{backgroundColor:'#eee'}]}>
 
-                <Image resizeMode="stretch" source={require('../../img/bg.jpeg')} style={{width:width,height:height}}>
+                <Image resizeMode="stretch" source={require('../../img/bg2.jpeg')} style={{width:width,height:height}}>
 
-                    <View style={{backgroundColor:'transparent',flex:1,justifyContent:'center',alignItems:'center'}}>
-                        <Image resizeMode="contain" source={require('../../img/loginLogo.png')} style={{justifyContent:'center',alignItems:'center',width:500,height:250,marginLeft:300,marginTop:50}}/>
+                    <View style={{backgroundColor:'transparent',flex:2,justifyContent:'center',alignItems:'center',}}>
+                        <View style={{backgroundColor:'transparent',width:130,height:130,borderRadius:65,borderWidth:3,borderColor:'#fff',justifyContent:'center',alignItems:'center',marginTop:50}}>
+                        <Image resizeMode="contain" source={require('../../img/fire2.png')} style={{justifyContent:'center',alignItems:'center',width:100,height:100}}/>
+                        </View>
                     </View>
 
                     <View style={{paddingVertical:2,paddingHorizontal:25,backgroundColor:'transparent',flex:1,alignItems:'center'}} >

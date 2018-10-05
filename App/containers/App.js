@@ -31,9 +31,6 @@ import {
     updateRootTab
 }  from '../actions/TabActions';
 
-
-
-
 class App extends Component {
 
     _createNavigatorItem(route,icon)
