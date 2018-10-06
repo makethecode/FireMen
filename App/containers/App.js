@@ -26,6 +26,7 @@ import {
 import Home from './Home-fix1';
 import Login from './Login';
 import Charts from './Charts'
+import Operations from './Operations'
 
 import {
     updateRootTab
@@ -42,6 +43,8 @@ class App extends Component {
             case  '图表':
             component=Charts;
                 break;
+            case '业务':
+            component=Operations;
             default:
                 break;
         }
@@ -125,6 +128,7 @@ class App extends Component {
                 <TabNavigator  tabBarStyle={defaultStyle} sceneStyle={defaultSceneStyle}>
                     {this._createNavigatorItem('首页','md-home')}
                     {this._createNavigatorItem('图表','md-stats')}
+                    {this._createNavigatorItem('业务','md-briefcase')}
                 </TabNavigator>
             );
         }else{
